@@ -1,0 +1,25 @@
+{% extends 'flatpages/default.html' %}
+<style>
+    h2 {
+    font-family: fantasy;
+    color: black;
+}
+h3 {
+   font-family: cursive;
+   font-size: medium;
+}
+h1 {
+    font-family: fantasy;
+    color: black;
+}
+
+</style>
+{% block content %}
+<h1>Удаление статьи</h1>
+<hr>
+<form action="" method="post">
+    {% csrf_token %}
+    <p>Удаляем "{{ object.name }}"?</p>
+    <input type="submit" value="Delete" />
+</form>
+{% endblock content %}

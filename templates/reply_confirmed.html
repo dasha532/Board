@@ -1,0 +1,19 @@
+{% extends 'flatpages/default.html' %}
+
+{% block content %}
+<style>
+h1 {
+    font-family: fantasy;
+    color: black;
+}
+
+</style>
+<hr>
+<div align="center">
+<h1>Отклик принят</h1>
+<br>
+<form action="{% url 'post_search' %}" >
+   <button class="btn btn-dark">Вернуться на главную</button>
+  </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,76 @@
+{% extends 'flatpages/default.html' %}
+{% load static %}
+{% block title %}
+{% endblock title %}
+
+
+{% block content %}
+<style>
+h1 {
+    font-family: fantasy;
+    color: black;
+}
+
+</style>
+<div style="text-align: center">
+   <h1>Все объявления</h1>
+    <div align="right">
+        <form action="{% url 'post_search' %}" >
+   <button class="btn btn-dark">Мои отклики</button>
+  </form>
+    </div>
+   <a href="http://127.0.0.1:8000/sign/login/">Вход|Регистрация</a>
+    <form action="http://127.0.0.1:8000/news/create/" >
+   <button class="btn btn-secondary btn-sm">Создать новость</button>
+  </form>
+</div>
+   <hr>
+   {% if posts %}
+           <ul class="list_group list-group-flush">
+           {% for post in posts %}
+           <li class="list-group-item">
+               <div style="text-align: center">
+               <a href="{% url 'post_detail' post.id %}">{{ post.name}}</a>
+               <small class="fw-bold">{{ post.time_in|date:'d M Y'  }}</small>
+               <small class="text-muted">(автор: {{post.author}})</small> <br>
+               <h6>Категория: {{ post.category}}</h6>
+               <p>{{ post.text| safe}}</p>
+               </div>
+           </li>
+           {% endfor %}
+</ul>
+   {% else %}
+       <h2 align="center">Объявлений пока нет!</h2>
+   {% endif %}
+{# Добавляем пагинацию на страницу #}
+   <div style="text-align: center">
+   {# Информация о предыдущих страницах #}
+   {% if page_obj.has_previous %}
+
+       <a href="?page=1" >1</a>
+
+       {% if page_obj.previous_page_number != 1 %}
+
+           ...
+           <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+
+       {% endif %}
+   {% endif %}
+
+   {# Информация о текущей странице #}
+   {{ page_obj.number }}
+
+   {# Информация о следующих страницах #}
+   {% if page_obj.has_next %}
+
+       <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+
+       {% if paginator.num_pages != page_obj.next_page_number %}
+           ...
+
+           <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+
+       {% endif %}
+   {% endif %}
+         </div>
+{% endblock content %}

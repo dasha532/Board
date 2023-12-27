@@ -1,0 +1,39 @@
+{% extends 'flatpages/default.html' %}
+{% block title %}
+<style>
+    h2 {
+    font-family: fantasy;
+    color: black;
+}
+h3 {
+   font-family: cursive;
+   font-size: medium;
+}
+h1 {
+    font-family: fantasy;
+    color: black;
+}
+
+</style>
+<link rel="stylesheet" href="./style.css">
+{% endblock title %}
+<link rel="stylesheet" href="/static/css/style.css">
+{% block content %}
+
+<div style="text-align: center">
+<h2>{{ post.name}}</h2>
+    <form action="{% url 'post_update' post.id %}" >
+   <button class="btn btn-dark">Редактировать</button>
+  </form>
+    <form action="{% url 'comment_create' post.id %}" >
+   <button class="btn btn-dark">Оставить отклик</button>
+  </form>
+<h3>Дата публикации: {{ post.time_in|date:'d M Y'  }}</h3>
+<h2>Описание:</h2>
+<h4>{{ post.text|safe}}</h4>
+    <form action="{% url 'post_list' %}" >
+   <button class="btn btn-secondary btn-sm">На главную</button>
+  </form>
+</div>
+<hr>
+{% endblock content %}

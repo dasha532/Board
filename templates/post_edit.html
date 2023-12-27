@@ -1,0 +1,29 @@
+{% extends 'flatpages/default.html' %}
+<style>
+    h2 {
+    font-family: fantasy;
+    color: black;
+}
+h3 {
+   font-family: cursive;
+   font-size: medium;
+}
+h1 {
+    font-family: fantasy;
+    color: black;
+}
+
+</style>
+{% block content %}
+<link rel="stylesheet" href="/static/css/style_post.css">
+<h1 align="center">Создать или редактировать пост</h1>
+<hr>
+<div style="text-align: center">
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.media }}
+    {{ form.as_p }}
+    <input type="submit" value="Save" />
+</form>
+</div>
+{% endblock content %}

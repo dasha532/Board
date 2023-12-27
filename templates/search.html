@@ -1,0 +1,65 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+{% endblock title %}
+
+{% block content %}
+<style>
+h2 {
+    font-family: fantasy;
+    color: black;
+}
+
+</style>
+<div style="text-align: center">
+    <h2>Мои отклики</h2>
+
+    <form action="" method="get">
+        {{ filterset.form.as_p }}
+        <input type="submit" value="Найти"/>
+    </form>
+    {% for comment in search %}
+     <div style="text-align: center">
+         {% if comment.post.author.id == user.id %}
+     {{ comment.user }}
+     {{ comment.post.name }}
+     {{ comment.time_in|date:'d.m.Y' }}
+     {{ comment.comment}}
+         <a href="{% url 'comment_delete' comment.id %}">Удалить</a>
+         <a href="{% url 'comment_confirm' comment.id %}">Принять</a>
+         {% endif %}
+     </div>
+</div>
+    {% endfor %}
+
+
+
+
+{# Добавляем пагинацию на страницу #}
+
+   {# Информация о предыдущих страницах #}
+   {% if page_obj.has_previous %}
+       <a href="?page=1">1</a>
+       {% if page_obj.previous_page_number != 1 %}
+           ...
+           <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+       {% endif %}
+   {% endif %}
+
+   {# Информация о текущей странице #}
+   {{ page_obj.number }}
+
+   {# Информация о следующих страницах #}
+   {% if page_obj.has_next %}
+       <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+       {% if paginator.num_pages != page_obj.next_page_number %}
+           ...
+           <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+       {% endif %}
+   {% endif %}
+<div style="text-align: center">
+<form action="{% url 'post_list' %}" >
+   <button class="btn btn-secondary btn-sm">На главную</button>
+  </form>
+</div>
+{% endblock content %}

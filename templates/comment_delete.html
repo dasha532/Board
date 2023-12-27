@@ -1,0 +1,29 @@
+{% extends 'flatpages/default.html' %}
+
+{% block content %}
+<style>
+h2 {
+    font-family: fantasy;
+    color: black;
+}
+h1 {
+    font-family: fantasy;
+    color: black;
+}
+
+</style>
+<div align="center">
+<h1>Удаление отклика</h1>
+<hr>
+<form action="" method="post">
+    {% csrf_token %}
+    <p><h2>Вы точно хотите его удалить?</h2></p>
+    <input class="btn btn-secondary btn-sm" type="submit" value="Delete" />
+</form>
+    <p>
+<form action="{% url 'post_list' %}" >
+   <button class="btn btn-dark">На главную</button>
+  </form>
+    </p>
+</div>
+{% endblock content %}

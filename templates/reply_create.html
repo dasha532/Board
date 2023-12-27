@@ -1,0 +1,27 @@
+{% extends 'flatpages/default.html' %}
+<style>
+    h2 {
+    font-family: fantasy;
+    color: black;
+}
+h3 {
+   font-family: cursive;
+   font-size: medium;
+}
+h1 {
+    font-family: fantasy;
+    color: black;
+}
+
+</style>
+{% block content %}
+<div align="center">
+<h1>Откликнуться</h1>
+<hr>
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="btn btn-dark" value="Отправить" />
+</form>
+</div>
+{% endblock content %}
